@@ -1,51 +1,51 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<meta charset="utf-8" />
-		<title></title>
-	</head>
-	<body>
-		<div id="send">
-			<h1>发送消息</h1>
-			<input type="text" name="" id="msgContent" value="" />
-			<button type="button" value="点我发送" onclick="chat.chating()">点我发送</button>
-		</div>
+<head>
+    <meta charset="utf-8"/>
+    <title></title>
+</head>
+<body>
+<div id="send">
+    <h1>发送消息</h1>
+    <input type="text" name="" id="msgContent" value=""/>
+    <button type="button" value="点我发送" onclick="chat.chating()">点我发送</button>
+</div>
 
-		<div id="receive">
-			<h1>接受消息</h1>
-			<div id="receiveMsg" style="background-color: aquamarine;"></div>
-		</div>
-		<script type="text/javascript">
-			window.chat = {
-				socket: null,
-				init: function() {
-					if (window.WebSocket) {
-						chat.socket = new WebSocket("ws://127.0.0.1:8889/ws")
-						chat.socket.onopen = function() {
-							console.log("链接建立成功")
-						}
-						chat.socket.onclose = function() {
-							console.log("链接关闭")
-						}
-						chat.socket.onerror = function() {
-							console.log("发生错误")
-						}
-						chat.socket.onmessage = function(e) {
-							console.log("接受到消息" + e.data)
-							let receiveMsg = document.getElementById("receiveMsg")
-							let html = receiveMsg.innerHTML
-							receiveMsg.innerHTML = html + "<br />" + e.data
-						}
-					} else {
-						alert("浏览器不支持webSocket")
-					}
-				},
-				chating: function() {
-					let msg = document.getElementById("msgContent")
-					chat.socket.send(msg.value)
-				}
-			}
-			chat.init()
-		</script>
-	</body>
+<div id="receive">
+    <h1>接受消息</h1>
+    <div id="receiveMsg" style="background-color: aquamarine;"></div>
+</div>
+<script type="text/javascript">
+    window.chat = {
+        socket: null,
+        init: function () {
+            if (window.WebSocket) {
+                chat.socket = new WebSocket("ws://127.0.0.1:8889/ws")
+                chat.socket.onopen = function () {
+                    console.log("链接建立成功")
+                }
+                chat.socket.onclose = function () {
+                    console.log("链接关闭")
+                }
+                chat.socket.onerror = function () {
+                    console.log("发生错误")
+                }
+                chat.socket.onmessage = function (e) {
+                    console.log("接受到消息" + e.data)
+                    let receiveMsg = document.getElementById("receiveMsg")
+                    let html = receiveMsg.innerHTML
+                    receiveMsg.innerHTML = html + "<br />" + e.data
+                }
+            } else {
+                alert("浏览器不支持webSocket")
+            }
+        },
+        chating: function () {
+            let msg = document.getElementById("msgContent")
+            chat.socket.send(msg.value)
+        }
+    }
+    chat.init()
+</script>
+</body>
 </html>

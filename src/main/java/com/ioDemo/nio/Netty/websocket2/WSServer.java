@@ -1,4 +1,4 @@
-package com.ioDemo.nio.Netty.websocket;
+package com.ioDemo.nio.Netty.websocket2;
 
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.ChannelFuture;

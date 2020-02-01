@@ -3,6 +3,6 @@ show i/o model
 
 BIO
 
-NIO
- --Netty
+NIO->netty
+ 
 AIO
